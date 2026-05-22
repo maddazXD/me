@@ -187,14 +187,30 @@
   }
 
   /* Name block */
-  .name-block { text-align: center; margin-bottom: 20px; }
+  .name-block { 
+    text-align: center; 
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
   .name-block h1 {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 700;
     letter-spacing: -1px;
     margin-bottom: 5px;
+    background: linear-gradient(135deg, var(--text) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
-  .name-block h1 em { color: var(--accent); font-style: normal; }
+  .name-block h1 em { 
+    color: var(--accent); 
+    font-style: normal;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
   .subtitle {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -208,13 +224,20 @@
     flex-wrap: wrap;
   }
   .badge {
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: linear-gradient(135deg, rgba(163, 255, 110, 0.08) 0%, rgba(94, 231, 196, 0.08) 100%);
+    border: 1px solid rgba(163, 255, 110, 0.2);
     border-radius: 20px;
-    padding: 6px 15px;
+    padding: 8px 16px;
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--accent2);
+    transition: all .3s ease;
+    cursor: default;
+  }
+  .badge:hover {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, rgba(163, 255, 110, 0.15) 0%, rgba(94, 231, 196, 0.15) 100%);
+    transform: translateY(-1px);
   }
 
   /* Divider */
@@ -226,11 +249,22 @@
 
   /* About card */
   .card {
-    background: var(--card);
+    background: linear-gradient(135deg, var(--card) 0%, rgba(26, 26, 31, 0.8) 100%);
     border: 1px solid var(--border);
     border-radius: 18px;
     padding: 16px 18px;
     margin-bottom: 14px;
+    transition: all .3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(163, 255, 110, 0.03) 0%, rgba(94, 231, 196, 0.03) 100%);
+    opacity: 0;
+    transition: opacity .3s ease;
   }
   .card-label {
     font-family: 'DM Mono', monospace;
@@ -277,6 +311,56 @@
   }
   .i-ico { font-size: 19px; }
 
+  /* ─── TECH STACK ─── */
+  .tech-stack {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .tech-item {
+    background: linear-gradient(135deg, rgba(163, 255, 110, 0.08) 0%, rgba(94, 231, 196, 0.08) 100%);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .tech-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(163, 255, 110, 0.15), rgba(94, 231, 196, 0.15));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .tech-item:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(163, 255, 110, 0.1);
+  }
+  .tech-item:hover::before {
+    opacity: 1;
+  }
+  .tech-icon {
+    font-size: 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .tech-name {
+    position: relative;
+    z-index: 1;
+    color: var(--text);
+  }
+
   /* ════════════════════════════
      PROJECTS PAGE
   ════════════════════════════ */
@@ -305,10 +389,31 @@
     border-radius: 18px;
     padding: 18px;
     cursor: pointer;
-    transition: border-color .2s, transform .15s;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
     -webkit-tap-highlight-color: transparent;
+    position: relative;
+    overflow: hidden;
   }
-  a.proj-card:active { transform: scale(.985); border-color: rgba(255,255,255,.13); }
+  a.proj-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(163, 255, 110, 0.05) 0%, rgba(94, 231, 196, 0.05) 100%);
+    opacity: 0;
+    transition: opacity .3s ease;
+  }
+  a.proj-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(163, 255, 110, 0.12);
+  }
+  a.proj-card:hover::before {
+    opacity: 1;
+  }
+  a.proj-card:active { 
+    transform: scale(.98) translateY(-2px);
+    border-color: rgba(255,255,255,.13);
+  }
 
   .proj-head {
     display: flex;
@@ -328,6 +433,7 @@
   .ico-a { background: rgba(163,255,110,.1); }
   .ico-b { background: rgba(94,231,196,.1); }
   .ico-c { background: rgba(255,80,80,.1); }
+  .ico-d { background: rgba(100,200,255,.1); }
 
   .proj-name {
     font-size: 15px;
@@ -371,7 +477,7 @@
   .social-list { display: flex; flex-direction: column; gap: 9px; }
 
   .soc-item {
-    background: var(--card);
+    background: linear-gradient(135deg, var(--card) 0%, rgba(26, 26, 31, 0.8) 100%);
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 14px 16px;
@@ -381,10 +487,30 @@
     text-decoration: none;
     color: inherit;
     cursor: pointer;
-    transition: border-color .2s, transform .15s;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    overflow: hidden;
   }
-  .soc-item:active { transform: scale(.985); border-color: rgba(255,255,255,.14); }
+  .soc-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(163, 255, 110, 0.05) 0%, rgba(94, 231, 196, 0.05) 100%);
+    opacity: 0;
+    transition: opacity .3s ease;
+  }
+  .soc-item:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(163, 255, 110, 0.1);
+  }
+  .soc-item:hover::before {
+    opacity: 1;
+  }
+  .soc-item:active { 
+    transform: scale(.98) translateY(-1px);
+    border-color: rgba(255,255,255,.14);
+  }
 
   .soc-ico {
     width: 42px; height: 42px;
@@ -468,11 +594,14 @@
       </div>
 
       <div class="card-label" style="padding: 0 2px; margin-bottom: 10px;">Minat &amp; Kebiasaan</div>
-      <div class="interest-grid">
-        <div class="interest-item"><span class="i-ico">💻</span>Vibe Coding</div>
-        <div class="interest-item"><span class="i-ico">🎧</span>Musik DJ</div>
-        <div class="interest-item"><span class="i-ico">🎓</span>Mahasiswa</div>
-        <div class="interest-item"><span class="i-ico">🇮🇩</span>Indonesia</div>
+      <div class="tech-stack">
+        <div class="tech-item" title="HTML"><span class="tech-icon">📄</span><span class="tech-name">HTML</span></div>
+        <div class="tech-item" title="CSS"><span class="tech-icon">🎨</span><span class="tech-name">CSS</span></div>
+        <div class="tech-item" title="JavaScript"><span class="tech-icon">⚡</span><span class="tech-name">JavaScript</span></div>
+        <div class="tech-item" title="React"><span class="tech-icon">⚛️</span><span class="tech-name">React</span></div>
+        <div class="tech-item" title="Next.js"><span class="tech-icon">▲</span><span class="tech-name">Next.js</span></div>
+        <div class="tech-item" title="TypeScript"><span class="tech-icon">🔷</span><span class="tech-name">TypeScript</span></div>
+        <div class="tech-item" title="Vite"><span class="tech-icon">⚙️</span><span class="tech-name">Vite</span></div>
       </div>
 
     </div>
@@ -529,6 +658,22 @@
             <span class="ptag">Python</span>
             <span class="ptag">yt-dlp</span>
             <span class="ptag">Downloader</span>
+          </div>
+        </a>
+
+        <a href="https://sanka-client-fetch--akunclippersaya.replit.app/" target="_blank" class="proj-card">
+          <div class="proj-head">
+            <div class="proj-head-left">
+              <div class="proj-ico ico-d">📚</div>
+              <div class="proj-name">Anicomic</div>
+            </div>
+            <span class="live-pill">● LIVE</span>
+          </div>
+          <div class="proj-desc">Platform streaming manga dan komik digital dengan koleksi lengkap dan antarmuka yang user-friendly untuk pengalaman membaca terbaik.</div>
+          <div class="proj-tags">
+            <span class="ptag">React</span>
+            <span class="ptag">TypeScript</span>
+            <span class="ptag">Streaming</span>
           </div>
         </a>
 
