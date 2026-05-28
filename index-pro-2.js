@@ -285,20 +285,7 @@ self.addEventListener('fetch',e=>{
     }catch(e){}
   })();
 
-  /* ── 7. AUDIO PLAYER (SomaFM Groove Salad — real free stream) ── */
-  const audio = new Audio('https://ice2.somafm.com/groovesalad-128-mp3');
-  audio.preload='none';
-  let playing=false;
-  function toggleAudio(){
-    if(playing){ audio.pause(); $('#audioToggle').textContent='▶'; playing=false; }
-    else { audio.play().then(()=>{ $('#audioToggle').textContent='⏸'; playing=true; $('#audioMini').classList.add('show'); }).catch(()=>origShowToast('Stream gagal')); }
-  }
-  $('#audioFab').onclick = ()=>{ $('#audioMini').classList.toggle('show'); if(!playing) toggleAudio(); };
-  $('#audioToggle').onclick = toggleAudio;
-  $('#audioVol').oninput = e=>{ audio.volume = e.target.value/100; };
-  audio.volume = 0.55;
-
-  /* ── 8. COMMAND PALETTE ── */
+  /* ── 7. COMMAND PALETTE ── */
   function buildCmds(){
     const base = [
       {t:'Profil', s:'Halaman about / skills', ic:'fa-user', act:()=>{location.hash='#/home'}},
@@ -308,8 +295,6 @@ self.addEventListener('fetch',e=>{
       {t:'Bagikan Halaman', s:'Web Share / copy link', ic:'fa-share-nodes', act:()=>$('#shareBtn').click()},
       {t:'Kirim Pesan', s:'Form kontak langsung', ic:'fa-paper-plane', act:()=>openMx('contactModal')},
       {t:'Download vCard', s:'Simpan kontak ke HP', ic:'fa-address-card', act:()=>openMx('qrModal')},
-      {t:'Putar / Jeda Audio', s:'Lofi stream', ic:'fa-music', act:toggleAudio},
-      {t:'Shortcuts', s:'Lihat keyboard shortcuts', ic:'fa-keyboard', act:()=>openMx('scModal')},
       {t:'Copy Email', s:'maddazryu14@gmail.com', ic:'fa-envelope', act:()=>{navigator.clipboard.writeText('maddazryu14@gmail.com');origShowToast('Email disalin!')}},
     ];
     $$('.proj-card-wrap .proj-card').forEach(c=>{
@@ -374,10 +359,7 @@ self.addEventListener('fetch',e=>{
     origShowToast('vCard tersimpan!');
   };
 
-  /* ── 12. SHORTCUTS BUTTON ── */
-  $('#scFab').onclick = ()=>openMx('scModal');
-
-  /* ── 13. BACK-TO-TOP ── */
+  /* ── 12. BACK-TO-TOP ── */
   function checkTop(){
     const p = document.querySelector('.page.active');
     if(!p) return;
@@ -407,10 +389,8 @@ self.addEventListener('fetch',e=>{
     if(e.target.matches('input,textarea')) return;
     const meta = e.ctrlKey||e.metaKey;
     if(meta && e.key.toLowerCase()==='k'){ e.preventDefault(); openCmdk(); return; }
-    if(e.key==='?'){ openMx('scModal'); return; }
     if(e.key.toLowerCase()==='t'){ $('#themeBtn').click(); return; }
     if(e.key.toLowerCase()==='s'){ $('#shareBtn').click(); return; }
-    if(e.key.toLowerCase()==='m'){ toggleAudio(); return; }
     if(e.key.toLowerCase()==='g'){ gPending=true; clearTimeout(gTimer); gTimer=setTimeout(()=>gPending=false,800); return; }
     if(gPending){
       gPending=false;

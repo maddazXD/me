@@ -566,16 +566,7 @@
 <div class="fab-stack">
   <button class="fab" id="cmdkOpen" title="Cari (Ctrl/⌘ K)"><i class="fa-solid fa-magnifying-glass"></i></button>
   <button class="fab alt" id="contactFab" title="Hubungi"><i class="fa-solid fa-paper-plane"></i></button>
-  <button class="fab" id="audioFab" title="Putar lofi"><i class="fa-solid fa-music"></i></button>
-  <button class="fab alt" id="scFab" title="Shortcuts (?)"><i class="fa-solid fa-keyboard"></i></button>
   <button class="fab" id="topFab" title="Naik ke atas" style="display:none"><i class="fa-solid fa-arrow-up"></i></button>
-</div>
-
-<!-- Audio mini-player -->
-<div class="audio-mini" id="audioMini">
-  <button id="audioToggle">▶</button>
-  <div class="at" id="audioTitle">SomaFM · Groove Salad</div>
-  <input type="range" id="audioVol" min="0" max="100" value="55">
 </div>
 
 <!-- Command palette -->
@@ -613,25 +604,6 @@
     <div class="mx-sub">// scan QR atau unduh vCard</div>
     <img id="qrImg" class="qr-img" alt="QR">
     <button class="mx-btn" id="vcardBtn">⬇ Download vCard (.vcf)</button>
-  </div>
-</div>
-
-<!-- Shortcuts modal -->
-<div class="mx-overlay" id="scModal">
-  <div class="mx-box">
-    <button class="mx-close" onclick="closeMx('scModal')">✕</button>
-    <div class="mx-title">⌨ Keyboard Shortcuts</div>
-    <div class="mx-sub">// navigasi cepat</div>
-    <table class="sc-table">
-      <tr><td>Buka pencarian</td><td>Ctrl / ⌘ + K</td></tr>
-      <tr><td>Halaman Profil</td><td>G H</td></tr>
-      <tr><td>Halaman Proyek</td><td>G P</td></tr>
-      <tr><td>Halaman Kontak</td><td>G C</td></tr>
-      <tr><td>Ganti tema</td><td>T</td></tr>
-      <tr><td>Buka shortcuts</td><td>?</td></tr>
-      <tr><td>Bagikan</td><td>S</td></tr>
-      <tr><td>Putar / jeda audio</td><td>M</td></tr>
-    </table>
   </div>
 </div>
 
