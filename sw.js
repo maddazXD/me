@@ -1,5 +1,5 @@
 /* ── MaddazXD Portfolio Service Worker v6.0 ── */
-const CACHE_NAME = "mxd-v6";
+const CACHE_NAME = "mxd-v7";
 const OFFLINE_URL = "./";
 
 /* Aset yang di-cache saat install */
