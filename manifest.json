@@ -1,0 +1,35 @@
+{
+  "name": "MaddazXD Portfolio",
+  "short_name": "MaddazXD",
+  "description": "Portfolio MaddazXD — Vibe Coder, Mahasiswa, DJ Music Lover dari Indonesia.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#050914",
+  "theme_color": "#050914",
+  "lang": "id",
+  "categories": ["portfolio", "developer"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='42' fill='%23050914'/%3E%3Ctext x='96' y='128' font-size='100' text-anchor='middle' font-family='monospace' fill='%2300ffb3' font-weight='bold'%3EM%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%23050914'/%3E%3Ctext x='256' y='340' font-size='270' text-anchor='middle' font-family='monospace' fill='%2300ffb3' font-weight='bold'%3EM%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://i.imgur.com/n0fab0q.jpeg",
+      "sizes": "400x400",
+      "type": "image/jpeg",
+      "label": "MaddazXD Portfolio"
+    }
+  ]
+}

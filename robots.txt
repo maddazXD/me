@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://maddazxd.my.id/sitemap.xml
