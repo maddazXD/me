@@ -322,9 +322,10 @@
       sync();
     });
 
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', async e => {
       e.preventDefault();
       let ok = true;
+      const emailInput = form.querySelector('input[type="email"]');
       form.querySelectorAll('[data-required]').forEach(input => {
         const field = input.closest('.field');
         const err = field.querySelector('.err');
@@ -345,6 +346,26 @@
 
       const submitBtn = form.querySelector('button[type="submit"]');
       if (submitBtn) submitBtn.disabled = true;
+
+      // Domain-level email verification (checks the domain can actually receive mail)
+      if (emailInput){
+        const emailField = emailInput.closest('.field');
+        const emailErr = emailField.querySelector('.err');
+        try {
+          const checkRes = await fetch(`/api/verify-email?email=${encodeURIComponent(emailInput.value.trim())}`);
+          const check = await checkRes.json();
+          if (!check.valid){
+            emailErr.textContent = state.lang === 'id'
+              ? 'Domain email ini sepertinya tidak valid / tidak bisa menerima email.'
+              : 'This email domain looks invalid / cannot receive email.';
+            toast(state.lang === 'id' ? 'Mohon periksa kembali alamat email.' : 'Please check your email address.');
+            if (submitBtn) submitBtn.disabled = false;
+            return;
+          }
+        } catch (err){
+          // If the check itself fails (e.g. function unavailable), don't block the user — fail open.
+        }
+      }
 
       const ajaxAction = form.action.replace('https://formsubmit.co/', 'https://formsubmit.co/ajax/');
       const formData = new FormData(form);
