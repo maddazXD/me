@@ -323,6 +323,7 @@
     });
 
     form.addEventListener('submit', e => {
+      e.preventDefault();
       let ok = true;
       form.querySelectorAll('[data-required]').forEach(input => {
         const field = input.closest('.field');
@@ -338,11 +339,36 @@
         if (err) err.textContent = message;
       });
       if (!ok){
-        e.preventDefault();
         toast(state.lang === 'id' ? 'Mohon lengkapi formulir dengan benar.' : 'Please complete the form correctly.');
-      } else {
-        toast(state.lang === 'id' ? 'Pesan terkirim. Terima kasih!' : 'Message sent. Thank you!');
+        return;
       }
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+
+      const ajaxAction = form.action.replace('https://formsubmit.co/', 'https://formsubmit.co/ajax/');
+      const formData = new FormData(form);
+
+      fetch(ajaxAction, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+        .then(res => {
+          if (!res.ok) throw new Error('bad status');
+          return res.json();
+        })
+        .then(() => {
+          toast(state.lang === 'id' ? 'Pesan terkirim. Terima kasih!' : 'Message sent. Thank you!');
+          form.reset();
+          form.querySelectorAll('.field').forEach(f => f.classList.remove('has-value', 'is-active'));
+        })
+        .catch(() => {
+          toast(state.lang === 'id' ? 'Gagal mengirim. Coba lagi nanti.' : 'Failed to send. Please try again later.');
+        })
+        .finally(() => {
+          if (submitBtn) submitBtn.disabled = false;
+        });
     });
   }
 
